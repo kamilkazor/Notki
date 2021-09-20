@@ -1,9 +1,14 @@
+//Importing gesture-handler for stack navigator
+import 'react-native-gesture-handler';
+
 import React from 'react';
-import {View, Text} from 'react-native';
+
+import MainNavigator from './src/navigation/MainNavogator';
+
 
 const App = () => {
   return(
-    <View><Text>Notki</Text></View>
+    <MainNavigator/>
   )
 }
 
