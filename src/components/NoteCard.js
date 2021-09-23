@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 
-const NoteCard = ({text}) => {
+const NoteCard = ({text, style}) => {
   return (
-    <View style={styles.card}>
+    <View style={{...styles.card, ...style}}>
       <Text>{text}</Text>
     </View>
   )
