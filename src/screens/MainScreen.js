@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, FlatList, StyleSheet, Button, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 
 import { useSelector } from 'react-redux';
 
@@ -9,24 +9,24 @@ import Footer, {FooterButton} from '../components/Footer';
 
 const MainScreen = () => {
   const notes = useSelector((store) => store.notes);
-  const [selectedNoteId, setSelectedNoteId] = useState('')
 
+  const [selectedNoteId, setSelectedNoteId] = useState('')
+  
   const notePressHandler = (id) => {
     selectedNoteId !== id ? setSelectedNoteId(id) : setSelectedNoteId('');
   }
   
+
+  //Showing footer if note is selected
   const [footerHeight, setFooterHeight] = useState(0);
 
-  const showHideFooter = () => {
-    const newFooterHeight = footerHeight === 0 ? 60 : 0;
-    setFooterHeight(newFooterHeight);
-  }
-
+  useEffect(() => {
+    selectedNoteId === '' ? setFooterHeight(0) : setFooterHeight(60)
+  }, [selectedNoteId])
 
 
   return (
     <View style={styles.container}>
-      <Button title='show footer' onPress={showHideFooter}/>
       <FlatList
         style={styles.list}
         keyExtractor={(item) => item.id}
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   selectedNote: {
-    backgroundColor: 'red'
+    backgroundColor: 'lightgrey'
   }
 })
 
