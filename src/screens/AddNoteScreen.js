@@ -2,24 +2,24 @@ import React, {useEffect}  from 'react';
 import {View, TextInput, StyleSheet, ScrollView} from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setAddNoteState } from '../redux/addNoteState';
+import { setNewNote } from '../redux/newNote';
 import { addNewNote } from '../redux/notes';
 
 import HeaderButton from '../components/HeaderButton';
 
 
 const AddNoteScreen = ({ navigation }) => {
-  const addNoteState = useSelector((store) => store.addNoteState);
+  const newNote = useSelector((store) => store.newNote);
   const dispatch = useDispatch()
 
   const clearState = () => {
-    dispatch(setAddNoteState({
+    dispatch(setNewNote({
       titleText: '',
       contentText: ''
     }))
   }
   const confirmNote = () => {
-    dispatch(addNewNote(addNoteState));
+    dispatch(addNewNote(newNote));
     navigation.goBack();
     clearState();
   }
@@ -27,7 +27,7 @@ const AddNoteScreen = ({ navigation }) => {
 
   useEffect(() => {
     const noteId = Date.now().toString();
-    dispatch(setAddNoteState({id: noteId}))
+    dispatch(setNewNote({id: noteId}))
   },[])
 
   //Adding functional buttons inside header.
@@ -47,7 +47,7 @@ const AddNoteScreen = ({ navigation }) => {
         </View>
       )
     })
-  },[addNoteState]);
+  },[newNote]);
   
 
   return (
@@ -57,16 +57,16 @@ const AddNoteScreen = ({ navigation }) => {
           <TextInput
             style={styles.titleInput}
             multiline={true}
-            value={addNoteState.titleText}
-            onChangeText={(value) => {dispatch(setAddNoteState({titleText: value}))}}
+            value={newNote.titleText}
+            onChangeText={(value) => {dispatch(setNewNote({titleText: value}))}}
           />
         </View>
         <View style={styles.contentContainer}>
           <TextInput
             style={styles.contentInput}
             multiline={true}
-            value={addNoteState.contentText}
-            onChangeText={(value) => {dispatch(setAddNoteState({contentText: value}))}}
+            value={newNote.contentText}
+            onChangeText={(value) => {dispatch(setNewNote({contentText: value}))}}
           />
         </View>
       </ScrollView>

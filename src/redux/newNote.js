@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-const addNoteStateSlice = createSlice({
-  name: 'addNoteState',
+const newNoteSlice = createSlice({
+  name: 'newNote',
   initialState: {
     titleText: '',
     contentText: '',
     id: ''
   },
   reducers: {
-    setAddNoteState: (state, action) => {
+    setNewNote: (state, action) => {
       const updatedState = {...state, ...action.payload};
       return updatedState;
     }
@@ -17,5 +17,5 @@ const addNoteStateSlice = createSlice({
 })
 
 
-export const {setAddNoteState} = addNoteStateSlice.actions;
-export default addNoteStateSlice.reducer;
+export const {setNewNote} = newNoteSlice.actions;
+export default newNoteSlice.reducer;
