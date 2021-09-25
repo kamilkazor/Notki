@@ -6,9 +6,10 @@ import { removeNote } from '../redux/notes';
 
 import NoteCard from '../components/NoteCard';
 import Footer, {FooterButton} from '../components/Footer';
+import HeaderButton from '../components/HeaderButton';
 
 
-const MainScreen = () => {
+const MainScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const notes = useSelector((store) => store.notes);
 
@@ -29,6 +30,20 @@ const MainScreen = () => {
     dispatch(removeNote(selectedNoteId));
     setSelectedNoteId('');
   }
+
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <View style={{flexDirection: 'row'}}>
+          <HeaderButton
+            icon='del'
+            pressHandler={removeSelectedNote}
+          />
+        </View>
+      )
+    })
+  },[selectedNoteId]);
 
 
   return (
