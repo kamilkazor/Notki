@@ -1,13 +1,35 @@
-import React  from 'react';
+import React, {useEffect}  from 'react';
 import {View, TextInput, StyleSheet, ScrollView} from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setAddNoteState } from '../redux/addNoteState'
 
+import HeaderButton from '../components/HeaderButton';
 
-const AddNoteScreen = () => {
+
+const AddNoteScreen = ({ navigation }) => {
   const addNoteState = useSelector((store) => store.addNoteState);
   const dispatch = useDispatch()
+
+  const clearState = () => {
+    dispatch(setAddNoteState({
+      titleInput: '',
+      contentInput: ''
+    }))
+  }
+
+
+  //Adding functional buttons inside header
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <HeaderButton
+          icon='x'
+          pressHandler={clearState}
+        />
+      )
+    })
+  },[]);
 
 
   return (
@@ -47,14 +69,13 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     marginHorizontal: 20,
-    paddingVertical: 10
+    paddingVertical: 10,
   },
   titleInput: {
     fontSize: 20,
     fontWeight: 'bold'
   },
   contentInput: {
-    flex: 1,
     fontSize: 20
   }
 })
