@@ -4,8 +4,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const addNoteStateSlice = createSlice({
   name: 'addNoteState',
   initialState: {
-    titleInput: '',
-    contentInput: ''
+    titleText: '',
+    contentText: '',
+    id: ''
   },
   reducers: {
     setAddNoteState: (state, action) => {

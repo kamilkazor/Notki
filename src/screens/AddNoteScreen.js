@@ -2,7 +2,8 @@ import React, {useEffect}  from 'react';
 import {View, TextInput, StyleSheet, ScrollView} from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setAddNoteState } from '../redux/addNoteState'
+import { setAddNoteState } from '../redux/addNoteState';
+import { addNewNote } from '../redux/notes';
 
 import HeaderButton from '../components/HeaderButton';
 
@@ -13,24 +14,41 @@ const AddNoteScreen = ({ navigation }) => {
 
   const clearState = () => {
     dispatch(setAddNoteState({
-      titleInput: '',
-      contentInput: ''
+      titleText: '',
+      contentText: ''
     }))
   }
+  const confirmNote = () => {
+    dispatch(addNewNote(addNoteState));
+    navigation.goBack();
+    clearState();
+  }
+  
 
+  useEffect(() => {
+    const noteId = Date.now().toString();
+    dispatch(setAddNoteState({id: noteId}))
+  },[])
 
-  //Adding functional buttons inside header
+  //Adding functional buttons inside header.
+  //Has to be udated after state change to pass current state inside pressHandlers
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <HeaderButton
-          icon='x'
-          pressHandler={clearState}
-        />
+        <View style={{flexDirection: 'row'}}>
+          <HeaderButton
+            icon='c'
+            pressHandler={clearState}
+            />
+          <HeaderButton
+            icon='ok'
+            pressHandler={confirmNote}
+            />
+        </View>
       )
     })
-  },[]);
-
+  },[addNoteState]);
+  
 
   return (
     <View style={styles.container}>
@@ -39,16 +57,16 @@ const AddNoteScreen = ({ navigation }) => {
           <TextInput
             style={styles.titleInput}
             multiline={true}
-            value={addNoteState.titleInput}
-            onChangeText={(value) => {dispatch(setAddNoteState({titleInput: value}))}}
+            value={addNoteState.titleText}
+            onChangeText={(value) => {dispatch(setAddNoteState({titleText: value}))}}
           />
         </View>
         <View style={styles.contentContainer}>
           <TextInput
             style={styles.contentInput}
             multiline={true}
-            value={addNoteState.contentInput}
-            onChangeText={(value) => {dispatch(setAddNoteState({contentInput: value}))}}
+            value={addNoteState.contentText}
+            onChangeText={(value) => {dispatch(setAddNoteState({contentText: value}))}}
           />
         </View>
       </ScrollView>
