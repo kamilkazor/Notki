@@ -39,7 +39,7 @@ const MainScreen = () => {
         data={notes}
         renderItem={({item}) => (
             <TouchableOpacity onPress={() => {notePressHandler(item.id)}}>
-              <NoteCard text={item.text} style={selectedNoteId === item.id ? styles.selectedNote : {}}/>
+              <NoteCard noteObj={item} style={selectedNoteId === item.id ? styles.selectedNote : {}}/>
             </TouchableOpacity>
         )}
       />
