@@ -20,7 +20,7 @@ const StackNav = () => {
           headerLeft: () => (
             <HeaderButton
               icon='+'
-              pressHandler={() => {navigation.navigate('AddNote')}}
+              pressHandler={() => {navigation.navigate('AddNote', {task: 'new'})}}
             />
           )
         })}

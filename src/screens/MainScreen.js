@@ -30,12 +30,20 @@ const MainScreen = ({navigation}) => {
     dispatch(removeNote(selectedNoteId));
     setSelectedNoteId('');
   }
+  const editSelectedNote = () => {
+    const selectedNote = notes.filter((note) => note.id === selectedNoteId)[0];
+    navigation.navigate('AddNote', {task: 'edit', note: selectedNote})
+  }
 
 
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <View style={{flexDirection: 'row'}}>
+          <HeaderButton
+            icon='ed'
+            pressHandler={editSelectedNote}
+          />
           <HeaderButton
             icon='del'
             pressHandler={removeSelectedNote}

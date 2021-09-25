@@ -1,34 +1,46 @@
-import React, {useEffect}  from 'react';
+import React, {useEffect, useState, useRef}  from 'react';
 import {View, TextInput, StyleSheet, ScrollView} from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setNewNote } from '../redux/newNote';
-import { addNewNote } from '../redux/notes';
+import { setEditedNote } from '../redux/editedNote';
+import { addNewNote, updateNote } from '../redux/notes';
 
 import HeaderButton from '../components/HeaderButton';
 
 
-const AddNoteScreen = ({ navigation }) => {
-  const newNote = useSelector((store) => store.newNote);
-  const dispatch = useDispatch()
-
-  const clearState = () => {
-    dispatch(setNewNote({
-      titleText: '',
-      contentText: ''
-    }))
-  }
-  const confirmNote = () => {
-    dispatch(addNewNote(newNote));
-    navigation.goBack();
-    clearState();
-  }
+const AddNoteScreen = ({ navigation, route }) => {
+  const dispatch = useDispatch();
+  const notes = useSelector((store) => store.notes);
   
+  
+  //Changing states and handlers depending on the task
+  const task = useRef(route.params.task).current;
 
-  useEffect(() => {
+  const confirmNewNote = () => {
     const noteId = Date.now().toString();
-    dispatch(setNewNote({id: noteId}))
+    dispatch(addNewNote({...noteState, id: noteId}));
+    navigation.goBack();
+    clearHandler();
+  }
+  const confirmEditedNote = () => {
+    dispatch(updateNote(noteState));
+    navigation.goBack();
+    clearHandler();
+  }
+
+  let noteState = task === 'edit' ? useSelector((store) => store.editedNote) : useSelector((store) => store.newNote);
+  let setNoteState = task === 'edit' ? (newState) => dispatch(setEditedNote(newState)) : (newState) => dispatch(setNewNote(newState));
+  let clearHandler = () => setNoteState({titleText: '', contentText: ''});
+  let confirmHandler = task === 'edit' ? confirmEditedNote : confirmNewNote;
+  
+  useEffect(() => {
+    if(task === 'edit'){
+      const oldNote = route.params.note;
+      setNoteState(oldNote);
+    }
   },[])
+
 
   //Adding functional buttons inside header.
   //Has to be udated after state change to pass current state inside pressHandlers
@@ -38,16 +50,16 @@ const AddNoteScreen = ({ navigation }) => {
         <View style={{flexDirection: 'row'}}>
           <HeaderButton
             icon='c'
-            pressHandler={clearState}
+            pressHandler={clearHandler}
             />
           <HeaderButton
             icon='ok'
-            pressHandler={confirmNote}
+            pressHandler={confirmHandler}
             />
         </View>
       )
     })
-  },[newNote]);
+  },[noteState]);
   
 
   return (
@@ -57,16 +69,16 @@ const AddNoteScreen = ({ navigation }) => {
           <TextInput
             style={styles.titleInput}
             multiline={true}
-            value={newNote.titleText}
-            onChangeText={(value) => {dispatch(setNewNote({titleText: value}))}}
+            value={noteState.titleText}
+            onChangeText={(value) => {setNoteState({titleText: value})}}
           />
         </View>
         <View style={styles.contentContainer}>
           <TextInput
             style={styles.contentInput}
             multiline={true}
-            value={newNote.contentText}
-            onChangeText={(value) => {dispatch(setNewNote({contentText: value}))}}
+            value={noteState.contentText}
+            onChangeText={(value) => {setNoteState({contentText: value})}}
           />
         </View>
       </ScrollView>
