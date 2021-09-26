@@ -53,6 +53,7 @@ const AddNoteScreen = ({ navigation, route }) => {
   useEffect(() => {
     noteValidated.current = validateNote();
     navigation.setOptions({
+      title: task === 'edit' ? 'Edit' : 'New',
       headerRight: () => (
         <View style={{flexDirection: 'row'}}>
           {noteValidated.current ? <CustomButton icon='eraser' pressHandler={clearHandler}/> : <View></View>}

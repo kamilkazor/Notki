@@ -12,11 +12,21 @@ const Stack = createStackNavigator();
 
 const StackNav = () => {
   return(
-    <Stack.Navigator>
+    <Stack.Navigator
+    screenOptions={{
+      headerStyle: {
+        elevation: 5,
+      },
+      headerTitleStyle: {
+        fontSize: 25
+      }
+    }}
+    >
       <Stack.Screen
         name='Main'
         component={MainScreen}
         options={({navigation}) => ({
+          title: 'Notes',
           headerLeft: () => (
             <CustomButton
               icon='plus'
@@ -29,6 +39,7 @@ const StackNav = () => {
         name='AddNote'
         component={AddNoteScreen}
         options={({navigation: {goBack}}) => ({
+          title: '',
           headerLeft: () => (
             <CustomButton
               icon='arrow-left'
