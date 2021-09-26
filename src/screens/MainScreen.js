@@ -36,21 +36,29 @@ const MainScreen = ({navigation}) => {
   }
 
 
+  //Selected note buttons will be shown only if note is selected
   useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <View style={{flexDirection: 'row'}}>
-          <HeaderButton
-            icon='ed'
-            pressHandler={editSelectedNote}
-          />
-          <HeaderButton
-            icon='del'
-            pressHandler={removeSelectedNote}
-          />
-        </View>
-      )
-    })
+    if(selectedNoteId) {
+      navigation.setOptions({
+        headerRight: () => (
+          <View style={{flexDirection: 'row'}}>
+            <HeaderButton
+              icon='ed'
+              pressHandler={editSelectedNote}
+            />
+            <HeaderButton
+              icon='del'
+              pressHandler={removeSelectedNote}
+            />
+          </View>
+        )
+      })
+    }
+    else {
+      navigation.setOptions({
+        headerRight: () => (<View></View>)
+      })
+    }
   },[selectedNoteId]);
 
 
