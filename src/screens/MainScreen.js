@@ -46,29 +46,15 @@ const MainScreen = ({navigation}) => {
   //Showing footer and buttons only if note is selected
   const [footerHeight, setFooterHeight] = useState(0);
   useEffect(() => {
-    if(selectedNoteId) {
-      setFooterHeight(60);
-      navigation.setOptions({
-        headerRight: () => (
-          <View style={{flexDirection: 'row'}}>
-            <CustomButton
-              icon='ed'
-              pressHandler={editSelectedNote}
-            />
-            <CustomButton
-              icon='del'
-              pressHandler={removeSelectedNote}
-            />
-          </View>
-        )
-      })
-    }
-    else {
-      setFooterHeight(0);
-      navigation.setOptions({
-        headerRight: () => (<View></View>)
-      })
-    }
+    selectedNoteId ? setFooterHeight(60) : setFooterHeight(0);
+    navigation.setOptions({
+      headerRight: () => (
+        <View style={{flexDirection: 'row'}}>
+          {selectedNoteId ? <CustomButton icon='ed' pressHandler={editSelectedNote}/> : <View></View>}
+          {selectedNoteId ? <CustomButton icon='del' pressHandler={removeSelectedNote}/> : <View></View>}
+        </View>
+      )
+    })
   },[selectedNoteId]);
 
 
