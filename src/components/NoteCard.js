@@ -5,8 +5,8 @@ import { StyleSheet, View, Text } from 'react-native';
 const NoteCard = ({noteObj, style}) => {
   return (
     <View style={{...styles.card, ...style}}>
-      <Text style={styles.titleText}>{noteObj.titleText}</Text>
-      <Text>{noteObj.contentText}</Text>
+      {noteObj.titleText ? <Text style={styles.titleText}>{noteObj.titleText}</Text> : <View></View>}
+      {noteObj.contentText ? <Text>{noteObj.contentText}</Text> : <View></View>}
     </View>
   )
 }
