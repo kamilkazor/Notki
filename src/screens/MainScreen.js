@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeNote } from '../redux/notes';
 
 import NoteCard from '../components/NoteCard';
-import Footer, {FooterButton} from '../components/Footer';
+// import Footer, {FooterButton} from '../components/Footer';
 import HeaderButton from '../components/HeaderButton';
 
 
@@ -20,10 +20,10 @@ const MainScreen = ({navigation}) => {
   }
   
   //Showing footer if note is selected
-  const [footerHeight, setFooterHeight] = useState(0);
-  useEffect(() => {
-    selectedNoteId === '' ? setFooterHeight(0) : setFooterHeight(60)
-  }, [selectedNoteId])
+  // const [footerHeight, setFooterHeight] = useState(0);
+  // useEffect(() => {
+  //   selectedNoteId === '' ? setFooterHeight(0) : setFooterHeight(60)
+  // }, [selectedNoteId])
   
 
   const removeSelectedNote = () => {
@@ -74,11 +74,11 @@ const MainScreen = ({navigation}) => {
             </TouchableOpacity>
         )}
       />
-      <View style={{height: footerHeight}}>
+      {/* <View style={{height: footerHeight}}>
         <Footer>
           <FooterButton icon='Delete' pressHandler={() => {removeSelectedNote()}}/>
         </Footer>
-      </View>
+      </View> */}
     </View>
   )
 }
