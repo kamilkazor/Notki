@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef}  from 'react';
+import React, {useEffect, useRef}  from 'react';
 import {View, TextInput, StyleSheet, ScrollView} from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,6 +12,11 @@ import CustomButton from '../components/CustomButton';
 const AddNoteScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const notes = useSelector((store) => store.notes);
+  const noteValidated = useRef(false);
+
+  const validateNote = () => {
+    return noteState.titleText || noteState.contentText ? true : false;
+  }
   
   
   //Changing states and handlers depending on the task
@@ -42,20 +47,16 @@ const AddNoteScreen = ({ navigation, route }) => {
   },[])
 
 
-  //Adding functional buttons inside header.
-  //Has to be udated after state change to pass current state inside pressHandlers
+  //Checking if note can be confirmed and adding functional buttons inside header.
+  //Has to be udated after state change to pass current state inside pressHandlers.
+  //Buttons will be hidden for empty note.
   useEffect(() => {
+    noteValidated.current = validateNote();
     navigation.setOptions({
       headerRight: () => (
         <View style={{flexDirection: 'row'}}>
-          <CustomButton
-            icon='c'
-            pressHandler={clearHandler}
-            />
-          <CustomButton
-            icon='ok'
-            pressHandler={confirmHandler}
-            />
+          {noteValidated.current ? <CustomButton icon='c' pressHandler={clearHandler}/> : <View></View>}
+          {noteValidated.current ? <CustomButton icon='ok' pressHandler={confirmHandler}/> : <View></View>}
         </View>
       )
     })
