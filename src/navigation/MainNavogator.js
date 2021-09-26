@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 
 import MainScreen from '../screens/MainScreen';
 import AddNoteScreen from '../screens/AddNoteScreen';
@@ -19,7 +19,8 @@ const StackNav = () => {
       },
       headerTitleStyle: {
         fontSize: 25
-      }
+      },
+      ...TransitionPresets.SlideFromRightIOS
     }}
     >
       <Stack.Screen
