@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeNote, changeNoteIndex } from '../redux/notes';
 
 import NoteCard from '../components/NoteCard';
-// import Footer, {FooterButton} from '../components/Footer';
+import Footer, {FooterButton} from '../components/Footer';
 import HeaderButton from '../components/HeaderButton';
 
 
@@ -19,13 +19,8 @@ const MainScreen = ({navigation}) => {
     selectedNoteId !== id ? setSelectedNoteId(id) : setSelectedNoteId('');
   }
   
-  //Showing footer if note is selected
-  // const [footerHeight, setFooterHeight] = useState(0);
-  // useEffect(() => {
-  //   selectedNoteId === '' ? setFooterHeight(0) : setFooterHeight(60)
-  // }, [selectedNoteId])
   
-
+  //Button press handlers
   const removeSelectedNote = () => {
     dispatch(removeNote(selectedNoteId));
     setSelectedNoteId('');
@@ -46,11 +41,13 @@ const MainScreen = ({navigation}) => {
     }
     dispatch(changeNoteIndex({oldIndex, newIndex}))
   }
-
-
-  //Selected note buttons will be shown only if note is selected
+  
+  
+  //Showing footer and buttons only if note is selected
+  const [footerHeight, setFooterHeight] = useState(0);
   useEffect(() => {
     if(selectedNoteId) {
+      setFooterHeight(60);
       navigation.setOptions({
         headerRight: () => (
           <View style={{flexDirection: 'row'}}>
@@ -67,6 +64,7 @@ const MainScreen = ({navigation}) => {
       })
     }
     else {
+      setFooterHeight(0);
       navigation.setOptions({
         headerRight: () => (<View></View>)
       })
@@ -86,11 +84,12 @@ const MainScreen = ({navigation}) => {
             </TouchableOpacity>
         )}
       />
-      {/* <View style={{height: footerHeight}}>
+      <View style={{height: footerHeight}}>
         <Footer>
-          <FooterButton icon='Delete' pressHandler={() => {removeSelectedNote()}}/>
+          <FooterButton icon='˄' pressHandler={() => {moveSelectedNote('up')}}/>
+          <FooterButton icon='˅' pressHandler={() => {moveSelectedNote('down')}}/>
         </Footer>
-      </View> */}
+      </View>
     </View>
   )
 }
