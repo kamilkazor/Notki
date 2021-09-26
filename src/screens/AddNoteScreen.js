@@ -53,10 +53,11 @@ const AddNoteScreen = ({ navigation, route }) => {
   useEffect(() => {
     noteValidated.current = validateNote();
     navigation.setOptions({
+      title: task === 'edit' ? 'Edit' : 'New',
       headerRight: () => (
         <View style={{flexDirection: 'row'}}>
-          {noteValidated.current ? <CustomButton icon='c' pressHandler={clearHandler}/> : <View></View>}
-          {noteValidated.current ? <CustomButton icon='ok' pressHandler={confirmHandler}/> : <View></View>}
+          {noteValidated.current ? <CustomButton icon='eraser' pressHandler={clearHandler}/> : <View></View>}
+          {noteValidated.current ? <CustomButton icon='text-box-check-outline' pressHandler={confirmHandler}/> : <View></View>}
         </View>
       )
     })
@@ -68,7 +69,6 @@ const AddNoteScreen = ({ navigation, route }) => {
       <ScrollView>
         <View style={styles.titleContainer}>
           <TextInput
-            autoFocus={true}
             placeholder='Title'
             style={styles.titleInput}
             multiline={true}
@@ -78,7 +78,8 @@ const AddNoteScreen = ({ navigation, route }) => {
         </View>
         <View style={styles.contentContainer}>
           <TextInput
-          placeholder='Note content'
+            autoFocus={true}
+            placeholder='Note content'
             style={styles.contentInput}
             multiline={true}
             value={noteState.contentText}

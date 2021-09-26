@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 
 import MainScreen from '../screens/MainScreen';
 import AddNoteScreen from '../screens/AddNoteScreen';
@@ -12,14 +12,25 @@ const Stack = createStackNavigator();
 
 const StackNav = () => {
   return(
-    <Stack.Navigator>
+    <Stack.Navigator
+    screenOptions={{
+      headerStyle: {
+        elevation: 5,
+      },
+      headerTitleStyle: {
+        fontSize: 25
+      },
+      ...TransitionPresets.SlideFromRightIOS
+    }}
+    >
       <Stack.Screen
         name='Main'
         component={MainScreen}
         options={({navigation}) => ({
+          title: 'Notes',
           headerLeft: () => (
             <CustomButton
-              icon='+'
+              icon='plus'
               pressHandler={() => {navigation.navigate('AddNote', {task: 'new'})}}
             />
           )
@@ -29,9 +40,10 @@ const StackNav = () => {
         name='AddNote'
         component={AddNoteScreen}
         options={({navigation: {goBack}}) => ({
+          title: '',
           headerLeft: () => (
             <CustomButton
-              icon='←'
+              icon='arrow-left'
               pressHandler={() => {goBack()}}
             />
           )

@@ -50,8 +50,8 @@ const MainScreen = ({navigation}) => {
     navigation.setOptions({
       headerRight: () => (
         <View style={{flexDirection: 'row'}}>
-          {selectedNoteId ? <CustomButton icon='ed' pressHandler={editSelectedNote}/> : <View></View>}
-          {selectedNoteId ? <CustomButton icon='del' pressHandler={removeSelectedNote}/> : <View></View>}
+          {selectedNoteId ? <CustomButton icon='square-edit-outline' pressHandler={editSelectedNote}/> : <View></View>}
+          {selectedNoteId ? <CustomButton icon='delete-outline' pressHandler={removeSelectedNote}/> : <View></View>}
         </View>
       )
     })
@@ -72,8 +72,8 @@ const MainScreen = ({navigation}) => {
       />
       <View style={{height: footerHeight}}>
         <Footer>
-          <CustomButton icon='˄' pressHandler={() => {moveSelectedNote('up')}}/>
-          <CustomButton icon='˅' pressHandler={() => {moveSelectedNote('down')}}/>
+          <CustomButton icon='chevron-up' pressHandler={() => {moveSelectedNote('up')}}/>
+          <CustomButton icon='chevron-down' pressHandler={() => {moveSelectedNote('down')}}/>
         </Footer>
       </View>
     </View>
