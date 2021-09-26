@@ -19,7 +19,7 @@ const StackNav = () => {
         options={({navigation}) => ({
           headerLeft: () => (
             <CustomButton
-              icon='+'
+              icon='plus'
               pressHandler={() => {navigation.navigate('AddNote', {task: 'new'})}}
             />
           )
@@ -31,7 +31,7 @@ const StackNav = () => {
         options={({navigation: {goBack}}) => ({
           headerLeft: () => (
             <CustomButton
-              icon='←'
+              icon='arrow-left'
               pressHandler={() => {goBack()}}
             />
           )

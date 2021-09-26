@@ -55,8 +55,8 @@ const AddNoteScreen = ({ navigation, route }) => {
     navigation.setOptions({
       headerRight: () => (
         <View style={{flexDirection: 'row'}}>
-          {noteValidated.current ? <CustomButton icon='c' pressHandler={clearHandler}/> : <View></View>}
-          {noteValidated.current ? <CustomButton icon='ok' pressHandler={confirmHandler}/> : <View></View>}
+          {noteValidated.current ? <CustomButton icon='eraser' pressHandler={clearHandler}/> : <View></View>}
+          {noteValidated.current ? <CustomButton icon='text-box-check-outline' pressHandler={confirmHandler}/> : <View></View>}
         </View>
       )
     })
