@@ -68,6 +68,8 @@ const AddNoteScreen = ({ navigation, route }) => {
       <ScrollView>
         <View style={styles.titleContainer}>
           <TextInput
+            autoFocus={true}
+            placeholder='Title'
             style={styles.titleInput}
             multiline={true}
             value={noteState.titleText}
@@ -76,6 +78,7 @@ const AddNoteScreen = ({ navigation, route }) => {
         </View>
         <View style={styles.contentContainer}>
           <TextInput
+          placeholder='Note content'
             style={styles.contentInput}
             multiline={true}
             value={noteState.contentText}
