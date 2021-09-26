@@ -61,10 +61,15 @@ const notesSlice = createSlice({
     removeNote: (state, action) => {
       const updatedState = state.filter((note) => note.id !== action.payload);
       return updatedState;
+    },
+    changeNoteIndex: (state, action) => {
+      let updatedState = [...state];
+      updatedState.splice(action.payload.newIndex, 0, updatedState.splice(action.payload.oldIndex, 1)[0]);
+      return updatedState;
     }
   }
 })
 
 
-export const {addNewNote, updateNote, removeNote} = notesSlice.actions;
+export const {addNewNote, updateNote, removeNote, changeNoteIndex} = notesSlice.actions;
 export default notesSlice.reducer;

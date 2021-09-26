@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { removeNote } from '../redux/notes';
+import { removeNote, changeNoteIndex } from '../redux/notes';
 
 import NoteCard from '../components/NoteCard';
 // import Footer, {FooterButton} from '../components/Footer';
@@ -33,6 +33,18 @@ const MainScreen = ({navigation}) => {
   const editSelectedNote = () => {
     const selectedNote = notes.filter((note) => note.id === selectedNoteId)[0];
     navigation.navigate('AddNote', {task: 'edit', note: selectedNote})
+  }
+  const moveSelectedNote = (direction) => {
+    const selectedNote = notes.filter((note) => note.id === selectedNoteId)[0];
+    const oldIndex = notes.indexOf(selectedNote);
+    let newIndex
+    if(direction === 'up'){
+      newIndex = oldIndex === 0 ? 0 : oldIndex - 1;
+    }
+    if(direction === 'down'){
+      newIndex = oldIndex === notes.length - 1 ? notes.length - 1 : oldIndex + 1;
+    }
+    dispatch(changeNoteIndex({oldIndex, newIndex}))
   }
 
 
