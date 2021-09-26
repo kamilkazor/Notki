@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeNote, changeNoteIndex } from '../redux/notes';
 
 import NoteCard from '../components/NoteCard';
-import Footer, {FooterButton} from '../components/Footer';
-import HeaderButton from '../components/HeaderButton';
+import Footer from '../components/Footer';
+import CustomButton from '../components/CustomButton';
 
 
 const MainScreen = ({navigation}) => {
@@ -51,11 +51,11 @@ const MainScreen = ({navigation}) => {
       navigation.setOptions({
         headerRight: () => (
           <View style={{flexDirection: 'row'}}>
-            <HeaderButton
+            <CustomButton
               icon='ed'
               pressHandler={editSelectedNote}
             />
-            <HeaderButton
+            <CustomButton
               icon='del'
               pressHandler={removeSelectedNote}
             />
@@ -86,8 +86,8 @@ const MainScreen = ({navigation}) => {
       />
       <View style={{height: footerHeight}}>
         <Footer>
-          <FooterButton icon='˄' pressHandler={() => {moveSelectedNote('up')}}/>
-          <FooterButton icon='˅' pressHandler={() => {moveSelectedNote('down')}}/>
+          <CustomButton icon='˄' pressHandler={() => {moveSelectedNote('up')}}/>
+          <CustomButton icon='˅' pressHandler={() => {moveSelectedNote('down')}}/>
         </Footer>
       </View>
     </View>

@@ -10,14 +10,6 @@ const Footer = ({children}) => {
   )
 }
 
-const FooterButton = ({icon, pressHandler}) => {
-  return (
-    <TouchableOpacity style={styles.FooterButton} onPress={pressHandler}>
-      <Text>{icon}</Text>
-    </TouchableOpacity>
-  )
-}
-
 
 const styles = StyleSheet.create({
   footer: {
@@ -27,15 +19,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly'
-  },
-  FooterButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    width: 60
   }
 })
 
 
 export default Footer;
-export {FooterButton};

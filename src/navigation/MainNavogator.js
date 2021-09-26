@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import MainScreen from '../screens/MainScreen';
 import AddNoteScreen from '../screens/AddNoteScreen';
-import HeaderButton from '../components/HeaderButton';
+import CustomButton from '../components/CustomButton';
 
 
 const Stack = createStackNavigator();
@@ -18,7 +18,7 @@ const StackNav = () => {
         component={MainScreen}
         options={({navigation}) => ({
           headerLeft: () => (
-            <HeaderButton
+            <CustomButton
               icon='+'
               pressHandler={() => {navigation.navigate('AddNote', {task: 'new'})}}
             />
@@ -30,7 +30,7 @@ const StackNav = () => {
         component={AddNoteScreen}
         options={({navigation: {goBack}}) => ({
           headerLeft: () => (
-            <HeaderButton
+            <CustomButton
               icon='←'
               pressHandler={() => {goBack()}}
             />

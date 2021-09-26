@@ -6,7 +6,7 @@ import { setNewNote } from '../redux/newNote';
 import { setEditedNote } from '../redux/editedNote';
 import { addNewNote, updateNote } from '../redux/notes';
 
-import HeaderButton from '../components/HeaderButton';
+import CustomButton from '../components/CustomButton';
 
 
 const AddNoteScreen = ({ navigation, route }) => {
@@ -48,11 +48,11 @@ const AddNoteScreen = ({ navigation, route }) => {
     navigation.setOptions({
       headerRight: () => (
         <View style={{flexDirection: 'row'}}>
-          <HeaderButton
+          <CustomButton
             icon='c'
             pressHandler={clearHandler}
             />
-          <HeaderButton
+          <CustomButton
             icon='ok'
             pressHandler={confirmHandler}
             />
