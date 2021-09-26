@@ -2,9 +2,9 @@ import React from 'react';
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 
 
-const HeaderButton = ({icon, pressHandler}) => {
+const CustomButton = ({icon, pressHandler}) => {
   return(
-    <TouchableOpacity style={styles.headerButton} onPress={pressHandler}>
+    <TouchableOpacity style={styles.customButton} onPress={pressHandler}>
       <Text>{icon}</Text>
     </TouchableOpacity>
   )
@@ -12,7 +12,7 @@ const HeaderButton = ({icon, pressHandler}) => {
 
 
 const styles = StyleSheet.create({
-  headerButton: {
+  customButton: {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100%',
@@ -20,4 +20,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default HeaderButton;
+export default CustomButton;

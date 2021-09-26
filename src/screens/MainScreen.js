@@ -1,13 +1,62 @@
-import React from 'react';
-import {View, FlatList, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeNote, changeNoteIndex } from '../redux/notes';
 
 import NoteCard from '../components/NoteCard';
+import Footer from '../components/Footer';
+import CustomButton from '../components/CustomButton';
 
 
-const MainScreen = () => {
+const MainScreen = ({navigation}) => {
+  const dispatch = useDispatch();
   const notes = useSelector((store) => store.notes);
+
+  //Selecting note
+  const [selectedNoteId, setSelectedNoteId] = useState('')
+  const notePressHandler = (id) => {
+    selectedNoteId !== id ? setSelectedNoteId(id) : setSelectedNoteId('');
+  }
+  
+  
+  //Button press handlers
+  const removeSelectedNote = () => {
+    dispatch(removeNote(selectedNoteId));
+    setSelectedNoteId('');
+  }
+  const editSelectedNote = () => {
+    const selectedNote = notes.filter((note) => note.id === selectedNoteId)[0];
+    navigation.navigate('AddNote', {task: 'edit', note: selectedNote})
+  }
+  const moveSelectedNote = (direction) => {
+    const selectedNote = notes.filter((note) => note.id === selectedNoteId)[0];
+    const oldIndex = notes.indexOf(selectedNote);
+    let newIndex
+    if(direction === 'up'){
+      newIndex = oldIndex === 0 ? 0 : oldIndex - 1;
+    }
+    if(direction === 'down'){
+      newIndex = oldIndex === notes.length - 1 ? notes.length - 1 : oldIndex + 1;
+    }
+    dispatch(changeNoteIndex({oldIndex, newIndex}))
+  }
+  
+  
+  //Showing footer and buttons only if note is selected
+  const [footerHeight, setFooterHeight] = useState(0);
+  useEffect(() => {
+    selectedNoteId ? setFooterHeight(60) : setFooterHeight(0);
+    navigation.setOptions({
+      headerRight: () => (
+        <View style={{flexDirection: 'row'}}>
+          {selectedNoteId ? <CustomButton icon='ed' pressHandler={editSelectedNote}/> : <View></View>}
+          {selectedNoteId ? <CustomButton icon='del' pressHandler={removeSelectedNote}/> : <View></View>}
+        </View>
+      )
+    })
+  },[selectedNoteId]);
+
 
   return (
     <View style={styles.container}>
@@ -16,9 +65,17 @@ const MainScreen = () => {
         keyExtractor={(item) => item.id}
         data={notes}
         renderItem={({item}) => (
-          <NoteCard text={item.text}/>
+            <TouchableOpacity onPress={() => {notePressHandler(item.id)}}>
+              <NoteCard noteObj={item} style={selectedNoteId === item.id ? styles.selectedNote : {}}/>
+            </TouchableOpacity>
         )}
       />
+      <View style={{height: footerHeight}}>
+        <Footer>
+          <CustomButton icon='˄' pressHandler={() => {moveSelectedNote('up')}}/>
+          <CustomButton icon='˅' pressHandler={() => {moveSelectedNote('down')}}/>
+        </Footer>
+      </View>
     </View>
   )
 }
@@ -30,6 +87,9 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1
+  },
+  selectedNote: {
+    backgroundColor: 'lightgrey'
   }
 })
 

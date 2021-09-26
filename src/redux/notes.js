@@ -4,64 +4,44 @@ import { createSlice } from "@reduxjs/toolkit";
 //Dummy initial state
 const dummyNotes = [
   {
-    text: 'lorem ipsum 1',
+    titleText: 'lorem ipsum 1',
+    contentText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     id: '1'
   },
   {
-    text: 'lorem ipsum 2',
+    titleText: 'lorem ipsum 2',
+    contentText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     id: '2'
   },
   {
-    text: 'lorem ipsum 3',
+    titleText: 'lorem ipsum 3',
+    contentText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     id: '3'
   },
   {
-    text: 'lorem ipsum 4',
+    titleText: 'lorem ipsum 4',
+    contentText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     id: '4'
   },
   {
-    text: 'lorem ipsum 5',
+    titleText: 'lorem ipsum 5',
+    contentText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     id: '5'
   },
   {
-    text: 'lorem ipsum 6',
+    titleText: 'lorem ipsum 6',
+    contentText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     id: '6'
   },
   {
-    text: 'lorem ipsum 7',
+    titleText: 'lorem ipsum 7',
+    contentText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     id: '7'
   },
   {
-    text: 'lorem ipsum 8',
+    titleText: 'lorem ipsum 8',
+    contentText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     id: '8'
-  },
-  {
-    text: 'lorem ipsum 9',
-    id: '9'
-  },
-  {
-    text: 'lorem ipsum 10',
-    id: '10'
-  },
-  {
-    text: 'lorem ipsum 11',
-    id: '11'
-  },
-  {
-    text: 'lorem ipsum 12',
-    id: '12'
-  },
-  {
-    text: 'lorem ipsum 13',
-    id: '13'
-  },
-  {
-    text: 'lorem ipsum 14',
-    id: '14'
-  },
-  {
-    text: 'lorem ipsum 15',
-    id: '15'
   }
 ]
 
@@ -71,12 +51,25 @@ const notesSlice = createSlice({
   initialState: [...dummyNotes],
   reducers: {
     addNewNote: (state, action) => {
-       const updatedState = [action.payload, ...state];
-       return updatedState;
+      const updatedState = [action.payload, ...state];
+      return updatedState;
+    },
+    updateNote: (state, action) => {
+      const updatedState = state.map((note) => note.id === action.payload.id ? action.payload : note);
+      return updatedState;
+    },
+    removeNote: (state, action) => {
+      const updatedState = state.filter((note) => note.id !== action.payload);
+      return updatedState;
+    },
+    changeNoteIndex: (state, action) => {
+      let updatedState = [...state];
+      updatedState.splice(action.payload.newIndex, 0, updatedState.splice(action.payload.oldIndex, 1)[0]);
+      return updatedState;
     }
   }
 })
 
 
-export const {addNewNote} = notesSlice.actions;
+export const {addNewNote, updateNote, removeNote, changeNoteIndex} = notesSlice.actions;
 export default notesSlice.reducer;
