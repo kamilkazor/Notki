@@ -1,7 +1,12 @@
 {
   "name": "notki",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
+  "author": {
+    "name": "Kamil Kazor",
+    "email": "79405091+kamilkazor@users.noreply.github.com",
+    "url": "https://github.com/kamilkazor"
+  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
