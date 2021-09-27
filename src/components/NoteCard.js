@@ -24,12 +24,14 @@ const styles = StyleSheet.create({
   card: {
     alignItems: 'flex-start',
     justifyContent: 'center',
-    margin: 10,
+    marginVertical: 8,
+    marginHorizontal: 16,
     padding: 15,
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 5,
-    borderStyle: 'dashed'
+    borderStyle: 'dashed',
+    backgroundColor: 'rgba(255,255,255,0.4)'
   },
   titleText: {
     fontWeight: 'bold',
@@ -41,7 +43,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10
   },
   contentText: {
-    fontSize: 20,
+    fontSize: 18,
     textAlign: 'justify'
   }
 })

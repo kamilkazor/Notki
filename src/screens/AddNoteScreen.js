@@ -79,7 +79,7 @@ const AddNoteScreen = ({ navigation, route }) => {
         <View style={styles.contentContainer}>
           <TextInput
             autoFocus={true}
-            placeholder='Note content'
+            placeholder='Text'
             style={styles.contentInput}
             multiline={true}
             value={noteState.contentText}

@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   selectedNote: {
-    backgroundColor: 'lightgrey'
+    backgroundColor: 'rgba(175,175,175,0.4)'
   }
 })
 
