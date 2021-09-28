@@ -1,7 +1,13 @@
 {
   "name": "notki",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
+  "repository": "https://github.com/kamilkazor/Notki.git",
+  "author": {
+    "name": "Kamil Kazor",
+    "email": "79405091+kamilkazor@users.noreply.github.com",
+    "url": "https://github.com/kamilkazor"
+  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -10,8 +16,19 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.15.8",
+    "@react-navigation/native": "^6.0.2",
+    "@react-navigation/stack": "^6.0.7",
+    "@reduxjs/toolkit": "^1.6.1",
     "react": "17.0.2",
-    "react-native": "0.65.1"
+    "react-native": "0.65.1",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.7.2",
+    "react-native-vector-icons": "^8.1.0",
+    "react-redux": "^7.2.5",
+    "redux": "^4.1.1",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
