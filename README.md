@@ -1,19 +1,19 @@
+<img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/kamilkazor/Notki?style=for-the-badge">
 <p align="center">
     <img alt="oss image" src="./preview/icon.png" width="100px">
     <h1 align="center">Notki</h1>
 </p>
 
 ## :clipboard: About
-<br />
 Notki is a simple, minimalistic to-do app made for Android in React Native CLI. You can add new notes, edit, delete or reorder them.
 
 ## :iphone: Preview
 <br />
 <p>
-    <img src="./preview/add_new.gif" width="250">
-    <img src="./preview/reorder.gif" width="250">
-    <img src="./preview/edit.gif" width="250">
-    <img src="./preview/delete.gif" width="250">
+    <img src="./preview/add_new.gif" width="200">
+    <img src="./preview/reorder.gif" width="200">
+    <img src="./preview/edit.gif" width="200">
+    <img src="./preview/delete.gif" width="200">
 </p>
 <br />
 
